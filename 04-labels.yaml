@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: labels
+  lables:
+    project: expense
+    environment: dev
+    owner: naveenrajoli
+
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+
+# WHAT IS LABELS
+
+# In Kubernetes, labels are key-value pairs assigned to resources (like Pods, Services, etc.) to help organize, select, and manage them efficiently.
+# They are crucial for grouping and filtering resources based on meaningful attributes.

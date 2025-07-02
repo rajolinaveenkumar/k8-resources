@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+
+metadata:
+  name: environmet-variable
+
+spec:
+  containers:
+  - name: env-container
+    image: nginx
+    env:
+    - name: owner
+      value: nginx
+    - name: project
+      value: expense
+    - name: environment 
+      value: dev
