@@ -4,9 +4,9 @@ kind: Pod
 metadata:
   name: labels
   lables:
-    project: expense
-    environment: dev
-    owner: naveenrajoli
+    name: naveenrajoli
+    environment: prod
+    
 
 spec:
   containers:
