@@ -1,7 +1,7 @@
 apiVersion: v1 # version
 kind: Pod # Kind of resource we are creating 
 metadata:
-  name: frontend # <resource-name-you-want> we should provide a name to above resource(kind: pod)
+  name: nginx-pod # <resource-name-you-want> we should provide a name to above resource(kind: pod)
   namespace: expense-dev # in which Namespace we are creating POD
 spec:
   # one pod can contain multiple containers
