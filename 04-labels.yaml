@@ -5,8 +5,7 @@ metadata:
   name: labels
   lables:
     name: naveenrajoli
-    environment: prod
-    
+    environment: prod   
 
 spec:
   containers:
