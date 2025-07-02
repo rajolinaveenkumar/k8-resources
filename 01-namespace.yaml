@@ -3,4 +3,5 @@ kind: Namespace # Kind of resource we are creating
 
 metadata:
   name: expense-dev #  <resource-name-you-want> we should provide a name to above resource(kind: Namespace)
-  
+  owner: "Naveen Rajoli"
+  environment: "dev"
