@@ -3,7 +3,7 @@ kind: Pod
 
 metadata:
   name: labels
-  lables:
+  labels:
     name: naveenrajoli
     environment: prod   
 
