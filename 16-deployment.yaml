@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: naveenrajoli/deployment:1.0.1
+        image: naveenrajoli/deployment:1.0.2
       # - name: apache-container
       #   image: httpd
         ports:
