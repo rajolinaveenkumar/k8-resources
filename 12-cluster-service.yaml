@@ -4,7 +4,7 @@ metadata:
   name: cluster-ip-Service
 
 spec:
-  selectors:
+  selector:
     created_by: naveen-rajoli
     environment: dev
     project: expense
