@@ -23,7 +23,7 @@ metadata:
     purpose: "ebs-static-demo"
 spec:
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1b
+    topology.kubernetes.io/zone: us-east-1a
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
@@ -33,9 +33,9 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
-  volumeMounts:
-    - name: persistent-storage
-      mountPath: /usr/share/nginx/html
+    volumeMounts:
+      - name: persistent-storage
+        mountPath: /usr/share/nginx/html
 
 ---
 kind: Service
