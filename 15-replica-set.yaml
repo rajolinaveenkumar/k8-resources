@@ -18,8 +18,23 @@ spec:
       labels:
         environment: dev
         purpose: to-run-desired-pods 
-        service: node-service # this labels are used to attach to a service
+        service: replica-pod-service # this labels are used to attach to a service
     spec:
       containers:
       - name: nginx
         image: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: replica-svc
+
+spec:
+  type: NodePort
+  selector:
+    service: replica-pod-service
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 32000
