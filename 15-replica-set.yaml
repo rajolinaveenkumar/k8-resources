@@ -5,8 +5,7 @@ metadata:
   labels:  # these labels are replicaset labels
     created_by: naveenrajoli
     environment: dev
-    purpose: to-run-desired-pods
-    
+    purpose: to-run-desired-pods    
 spec:
   replicas: 3
   selector:
@@ -17,6 +16,8 @@ spec:
     metadata:
       name: replica-pod
       labels:
+        environment: dev
+        purpose: to-run-desired-pods 
         service: node-service # this labels are used to attach to a service
     spec:
       containers:
