@@ -15,7 +15,6 @@ spec:
       purpose: to-run-desired-pods
   template:
     metadata:
-      name: replica-pod
       labels:
         service: node-service # this labels are used to attach to a service
     spec:
