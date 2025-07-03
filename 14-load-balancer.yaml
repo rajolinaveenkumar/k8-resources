@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-svc
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: to-access-nginx-using-lb
+    usecase: accesing-app-using-lb
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 31000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-pod
+  labels:
+    created_by: naveen-rajoli
+    environment: dev
+    purpose: to-access-nginx-using-lb
+    usecase: accesing-app-using-lb
+
+spec:
+  containers:
+  - name: nginx
+    image: nginx
