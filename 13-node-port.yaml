@@ -1,9 +1,10 @@
 apiVersion: v1
-kind: NodePort
+kind: Service
 metadata:
   name: node-port-svc
 
 spec:
+  type: NodePort
   selector:
     purpose: to-access-nginx
     ports: inside-pod-open-port-number-80
