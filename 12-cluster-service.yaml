@@ -23,9 +23,10 @@ metadata:
     created_by: naveen-rajoli
     environment: dev
     project: expense
-    purpose: comunication between pods
+    purpose: comunication-between-pods
     SNOW: CHG00065784
 spec:
   containers: 
   - name: nginx
     image: nginx
+
