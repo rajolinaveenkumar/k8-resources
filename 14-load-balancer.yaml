@@ -16,7 +16,7 @@ spec:
 ---
 
 apiVersion: v1
-kind: Service
+kind: Pod
 metadata:
   name: lb-pod
   labels:
