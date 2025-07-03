@@ -10,11 +10,12 @@ metadata:
 spec:
   replicas: 3
   selector:
-    matchlabels: # replicaset use these labels to find the pods for creating desired number of replicas
+    matchLabels: # replicaset use these labels to find the pods for creating desired number of replicas
       environment: dev
       purpose: to-run-desired-pods
   template:
     metadata:
+      name: replica-pod
       labels:
         service: node-service # this labels are used to attach to a service
     spec:
