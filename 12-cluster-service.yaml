@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cluster-ip-Service
+
+spec:
+  selectors:
+    created_by: naveen-rajoli
+    environment: dev
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80 
+    targetPort: 80 # conatiner port , here nginx open port no. 80 by default
+
+---
+
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: cluster-ip-pod 
+  labels:
+    created_by: naveen-rajoli
+    environment: dev
+    project: expense
+    purpose: comunication between pods
+    SNOW: CHG00065784
+spec:
+  containers: 
+  - name: nginx
+    image: nginx
