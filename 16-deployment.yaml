@@ -21,8 +21,10 @@ spec:
         service: port-80-running
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.14.2
+      # - name: nginx
+      #   image: nginx:1.14.2
+      - name: apache-container
+        image: httpd
         ports:
         - containerPort: 80
    
