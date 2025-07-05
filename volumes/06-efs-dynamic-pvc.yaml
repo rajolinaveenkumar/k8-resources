@@ -16,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eff-dep
+  name: efs-dep
   labels:
     project: expense
     type: efs-static-volume
@@ -32,6 +32,7 @@ spec:
         type: efs-static-volume
     spec:
       volumes:
+      - name: persistent-storage
         persistentVolumeClaim:
           claimName: efs-static-pvc 
       containers:
@@ -40,7 +41,7 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: efs-static-pvc
+        - name: persistent-storage
           mountPath: /usr/share/nginx/html
 
 ---
