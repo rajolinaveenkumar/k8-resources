@@ -10,3 +10,4 @@ parameters:
   basePath: "/expense"
 # allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
