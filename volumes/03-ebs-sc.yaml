@@ -1,7 +1,8 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
-metadata:
- name: ebs-sc
+metadata:     
+  name: ebs-dynamic-sc
 provisioner: ebs.csi.aws.com
 reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
+# allowVolumeExpansion: true    # ✅ Optional, but useful for resizing EBS

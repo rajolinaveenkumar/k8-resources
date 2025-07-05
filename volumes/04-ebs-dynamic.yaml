@@ -1,37 +1,57 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-dynamic-pvc 
-  
+  name: ebs-dynamic-pvc
 spec:
-  storageClassName: "ebs-sc" # Empty string must be explicitly set otherwise default StorageClass will be set
-  accessModes:
+  accessModes: 
     - ReadWriteOnce
+  storageClassName: "ebs-dynamic-sc"
   resources:
     requests:
-      storage: 15Gi
+      storage: 20Gi
+
 ---
-apiVersion: v1
-kind: Pod
+
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: ebs-dynamic-pod 
+  name: ebs-dynamic-dep
   labels:
-    purpose: "ebs-dynamic-demo"
+    project: expense
+    component: api 
+    environmet: prod  
 spec:
-  nodeSelector:
-    topology.kubernetes.io/zone: us-east-1a
-  volumes:
-  - name: persistent-storage
-    persistentVolumeClaim:
-      claimName: ebs-dynamic-pvc
-  containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
-    volumeMounts:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: expense
+      component: api 
+      environmet: prod
+      purpose: "ebs-dynamic-demo"
+  template:
+    metadata:
+      name: ebs-dynamic-pod
+      labels:
+        project: expense
+        component: api 
+        environmet: prod
+          
+    spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      volumes:
       - name: persistent-storage
-        mountPath: /usr/share/nginx/html
+        persistentVolumeClaim:
+          claimName: ebs-dynamic-pvc  
+      containers:
+      - name: ebs-dynamic-pod
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /usr/share/nginx/html
+
 
 ---
 kind: Service
@@ -46,4 +66,4 @@ spec:
   - protocol: TCP
     port: 80 # service port
     targetPort: 80 # conatiner port
-    nodePort: 30007
+    nodePort: 30007 

@@ -6,8 +6,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 30Gi
+    storage: 15Gi
+  persistentVolumeReclaimPolicy: Retain  # optional but recommended
+  storageClassName: manual               # must match PVC
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-0f005ee01fd482a6a
+    volumeHandle: vol-05d8a95c91dd4b1c1 # ✅ your EBS volume ID
