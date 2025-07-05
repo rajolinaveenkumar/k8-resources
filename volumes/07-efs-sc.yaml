@@ -8,5 +8,5 @@ parameters:
   fileSystemId: fs-0626b2bf740dc56be
   directoryPerms: "700"
   basePath: "/expense"
-
-  
+# allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
