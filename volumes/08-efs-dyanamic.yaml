@@ -5,60 +5,54 @@ metadata:
 spec:
   storageClassName: "efs-sc"
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany   
   resources:
     requests:
-      storage: 10Gi
-
+      storage: 19Gi
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: efs-dynamic-sc
   labels:
-    environmet: prod
+    environment: prod
     project: expense
 spec:
   replicas: 1
   selector:
     matchLabels:
-      environmet: prod
+      environment: prod
       project: expense
   template:
     metadata:
-      
       labels:
-        environmet: prod
+        environment: prod
         project: expense
     spec:
       volumes:
-      - name: persistent-storage
-        persistentVolumeClaim:
-          claimName: efs-dynamic-sc
-      containers: 
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-        volumeMounts:
         - name: persistent-storage
-          mountPath: /usr/share/nginx/html
-
+          persistentVolumeClaim:
+            claimName: efs-dynamic-sc
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /usr/share/nginx/html
 ---
-
-
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: efs-dynamic-lb
 spec:
   type: LoadBalancer
-  selector: # labels are used as selectors
-    environmet: prod
+  selector:
+    environment: prod     
     project: expense
   ports:
-  - protocol: TCP
-    port: 80 # service port
-    targetPort: 80 # conatiner port
-    nodePort: 30007 
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30007
