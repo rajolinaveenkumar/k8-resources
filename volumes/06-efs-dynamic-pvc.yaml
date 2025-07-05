@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static-pvc 
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  volumeName: efs-static-pv 
+  resources:
+    requests:
+      storage: 15Gi
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eff-dep
+  labels:
+    project: expense
+    type: efs-static-volume
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: efs-static-volume
+  template:
+    metadata:
+      name: efs-pod
+      labels:
+        type: efs-static-volume
+    spec:
+      volumes:
+        persistentVolumeClaim:
+          claimName: efs-static-pvc 
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: efs-static-pvc
+          mountPath: /usr/share/nginx/html
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: ebs-dynamic-lb
+spec:
+  type: LoadBalancer
+  selector: # labels are used as selectors
+    type: efs-static-volume
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80 # conatiner port
+    nodePort: 30007 
