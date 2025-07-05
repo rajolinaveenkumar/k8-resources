@@ -27,7 +27,7 @@ spec:
       project: expense
   template:
     metadata:
-      name: pod-dep
+      
       labels:
         environmet: prod
         project: expense
